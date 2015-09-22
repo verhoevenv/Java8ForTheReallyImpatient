@@ -29,7 +29,7 @@ public class Ex2Test {
 
         Assertions.assertThat(subdirs).containsExactly(subfolder);
     }
-    
+
     @Test
     public void testSubdirs_method() throws Exception {
         File subfolder = folder.newFolder("subfolder");

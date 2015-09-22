@@ -1,0 +1,27 @@
+When I and J are interfaces, and a class implement both...
+
+         I.f() is |    abstract    |      default       |     static
+J.f() is          |                |                    |
+-------------------------------------------------------------------------
+abstract          | must implement |   must implement   | must implement
+-------------------------------------------------------------------------
+default           | must implement | must implement (*) |     J.f()
+-------------------------------------------------------------------------
+static            | must implement |       I.f()        |     no f()
+
+"must implement" shoud be interpreted as "the class must implement f() or be declared abstract"
+
+(*) class can implement f() itself, or choose implementation from either interface
+
+=====================================================================================
+
+When I is an interface and S the superclass...
+
+         I.f() is |    abstract    |      default       |     static
+S.f() is          |                |                    |
+----------------------------------------------------------------------------
+abstract          | must implement |   must implement   |   must implement
+----------------------------------------------------------------------------
+implemented       |     S.f()      |       S.f()        |       S.f()
+----------------------------------------------------------------------------
+static            | must implement |       error        | S.f() (w/ warning)

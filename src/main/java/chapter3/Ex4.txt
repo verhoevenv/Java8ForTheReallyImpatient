@@ -1,0 +1,10 @@
+java.io.FileFilter (since 1.2)
+java.io.FileNameFilter (since 1.0)
+java.nio.file.DirectoryStream.Filter (since 1.7)
+java.util.logging.Filter  (since 1.4)
+java.xml.stream.EventFilter (since 1.6)
+javax.imageio.spi.ServiceRegistry.Filter (since 1.7 or before)
+javax.management.NotificationFilter (since 1.5)
+javax.xml.stream.StreamFilter (since 1.6)
+
+I'm not sure any of these adds value over Predicate<T>, but all of these already existed before 1.8

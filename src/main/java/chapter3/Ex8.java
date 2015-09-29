@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 public class Ex8 {
     public static void main(String[] args) {
-        Image image = new Image(Ex5.class.getResourceAsStream("/lenna.png"));
+        Image image = new Image(Ex8.class.getResourceAsStream("/lenna.png"));
 
         ColorTransformer framer = createFramer(image.getWidth(), image.getHeight(), 20, Color.FUCHSIA);
         Image transformed = Ex5.transform(image, framer);

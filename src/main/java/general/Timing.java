@@ -1,7 +1,5 @@
 package general;
 
-import chapter2.Ex1;
-
 import java.util.concurrent.Callable;
 
 public class Timing<T> {

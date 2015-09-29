@@ -15,7 +15,7 @@ public class Ex8 {
         ImageViewer.view(transformed);
     }
 
-    private static ColorTransformer createFramer(double imageWidth, double imageHeight, int borderWidth, Color color) {
+    public static ColorTransformer createFramer(double imageWidth, double imageHeight, int borderWidth, Color color) {
         return (x, y, c) -> {
             if(x < borderWidth || y < borderWidth || imageWidth - x < borderWidth || imageHeight - y < borderWidth) {
                 return color;

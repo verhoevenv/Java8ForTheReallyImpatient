@@ -23,7 +23,7 @@ public class Ex5Test {
         //A duplicate value would mean the period of the numbers is less than 100 (aka you couldn't generate more than 100 numbers)
         //That would be sad, and you'd need other values for the parameters
         Assertions.assertThat(randNums).doesNotHaveDuplicates();
-        
+
         //... your favorite random number test here?
 
         System.out.println(Arrays.toString(randNums));

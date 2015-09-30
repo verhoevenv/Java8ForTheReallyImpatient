@@ -25,7 +25,6 @@ public class Ex3 {
         System.out.println(String.format("PARALLEL: Number of long words: %s", timingParallel.summarize()));
     }
 
-    //for comparison...
     private static int getCount_singlethreaded(List<String> words) {
         return (int) words.stream().filter(w -> w.length() > 12).count();
     }

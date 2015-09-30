@@ -18,12 +18,6 @@ public class Ex3 {
         String contents = new String(Files.readAllBytes(fileLocation), StandardCharsets.UTF_8);
         List<String> words = Arrays.asList(contents.split("[\\P{L}]+"));
 
-        //warmup
-        IntStream.range(0, 1000).forEach((x) -> {
-            getCount_singlethreaded(words);
-            getCount_parallel(words);
-        });
-
         StatisticalTiming<Integer> timingSingle = timeN(() -> getCount_singlethreaded(words), 100);
         StatisticalTiming<Integer> timingParallel = timeN(() -> getCount_parallel(words), 100);
 

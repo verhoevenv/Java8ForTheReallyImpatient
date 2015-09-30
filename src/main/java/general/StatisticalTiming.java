@@ -6,6 +6,7 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.Arrays;
 import java.util.concurrent.Callable;
+import java.util.stream.IntStream;
 
 import static general.Timing.time;
 
@@ -17,6 +18,11 @@ public class StatisticalTiming<T> {
     }
 
     public static <T> StatisticalTiming<T> timeN(Callable<T> call, int times) throws Exception {
+        //warmup
+        for(int i = 0; i<500; i++) {
+            call.call();
+        }
+
         Timing[] results = new Timing[times];
         for(int i = 0; i<times; i++) {
             results[i] = time(call);

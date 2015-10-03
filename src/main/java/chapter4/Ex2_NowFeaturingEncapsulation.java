@@ -53,6 +53,7 @@ public class Ex2_NowFeaturingEncapsulation {
         public Property<T> property() {
             if (property == null) {
                 property = propertyFactory.get();
+                property.setValue(value);
             }
             return property;
         }

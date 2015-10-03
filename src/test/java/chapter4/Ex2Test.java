@@ -39,4 +39,20 @@ public class Ex2Test {
         Assertions.assertThat(ex2.property_accessForTesting()).isNull();
     }
 
+
+    @Test
+    public void propertyAccessWorksAsItShould_forEncapsulatedVersion() {
+        Ex2_NowFeaturingEncapsulation ex2 = new Ex2_NowFeaturingEncapsulation();
+        StringProperty testProp = new SimpleStringProperty();
+
+        StringProperty nameProperty = ex2.nameProperty();
+
+        nameProperty.bindBidirectional(testProp);
+
+        testProp.setValue("Walter White");
+        Assertions.assertThat(ex2.getName()).isEqualTo("Walter White");
+
+        ex2.setName("Jesse Pinkman");
+        Assertions.assertThat(testProp.getValue()).isEqualTo("Jesse Pinkman");
+    }
 }

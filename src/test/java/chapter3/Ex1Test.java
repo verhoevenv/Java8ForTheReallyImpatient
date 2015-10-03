@@ -10,8 +10,6 @@ import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static junit.framework.Assert.fail;
-
 public class Ex1Test {
 
     private Ex1.ConditionalLogger conditionalLogger;
@@ -47,7 +45,7 @@ public class Ex1Test {
 
         conditionalLogger.logIf(Level.INFO,
                 () -> {
-                    fail();
+                    Assertions.fail("Should not evaluate condition");
                     return false;
                 },
                 () -> "Log this");

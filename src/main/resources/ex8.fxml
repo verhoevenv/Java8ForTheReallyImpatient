@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import chapter4.ex8.Company?>
+<?import chapter4.ex8.ManagerRole?>
+<?import chapter4.ex8.Person?>
+<?import chapter4.ex8.EmployeeRole?>
+<Company xmlns:fx="http://javafx.com/fxml" fx:id="company" fx:controller="chapter4.Ex8" name="Umbrella Corporation">
+    <ceo>
+        <ManagerRole>
+            <person>
+                <Person name="Ozwell E. Spencer"/>
+            </person>
+            <employees>
+                <EmployeeRole>
+                    <person>
+                        <Person name="Carlos Oliveira"/>
+                    </person>
+                </EmployeeRole>
+                <ManagerRole>
+                    <person>
+                        <Person name="James Marcus"/>
+                    </person>
+                    <employees>
+                        <EmployeeRole>
+                            <person>
+                                <Person name="Albert Wesker"/>
+                            </person>
+                        </EmployeeRole>
+                        <EmployeeRole>
+                            <person>
+                                <Person name="William Birkin"/>
+                            </person>
+                        </EmployeeRole>
+                    </employees>
+                </ManagerRole>
+            </employees>
+        </ManagerRole>
+    </ceo>
+</Company>

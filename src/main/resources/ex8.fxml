@@ -18,7 +18,7 @@
                 </EmployeeRole>
                 <ManagerRole>
                     <person>
-                        <Person name="James Marcus"/>
+                        <Person name="James Marcus" fx:id="jamesMarcus"/>
                     </person>
                     <employees>
                         <EmployeeRole>

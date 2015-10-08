@@ -15,11 +15,13 @@ public class Ex8 implements Initializable {
     @FXML
     private Company company;
 
+    @FXML
+    private Person jamesMarcus;
+
     private SimpleStringProperty jamesMarcusName = new SimpleStringProperty();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Person jamesMarcus = company.getCeo().getEmployees().get(1).getPerson();
         jamesMarcusName.set(jamesMarcus.getName());
 
         jamesMarcus.nameProperty().bind(jamesMarcusName);

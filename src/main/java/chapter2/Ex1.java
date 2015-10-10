@@ -29,7 +29,7 @@ public class Ex1 {
         //Timing<Integer> timing = time(() -> getCount_singlethreaded_streams(words));
         //Timing<Integer> timing = time(() -> getCount_multithreaded_streams(words));
 
-        System.out.println(String.format("Number of long words: %d (in %d μs)", timing.getResult(), timing.getNanoDuration() / 1000));
+        System.out.println(String.format("Number of long words: %d (in %d μs)", timing.getResult(), timing.getDuration().toNanos() / 1000));
     }
 
     private static int getCount_singlethreaded(List<String> words) {

@@ -1,12 +1,9 @@
 package general;
 
 import org.apache.commons.math3.distribution.TDistribution;
-import org.apache.commons.math3.exception.MathIllegalArgumentException;
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.Arrays;
 import java.util.concurrent.Callable;
-import java.util.stream.IntStream;
 
 import static general.Timing.time;
 
@@ -27,18 +24,18 @@ public class StatisticalTiming<T> {
         for(int i = 0; i<times; i++) {
             results[i] = time(call);
         }
-        return new StatisticalTiming<T>(results);
+        return new StatisticalTiming<>(results);
     }
 
     public double avgNanoDuration() {
-        return Arrays.stream(results).mapToLong(Timing::getNanoDuration).average().getAsDouble();
+        return Arrays.stream(results).mapToLong(timing -> timing.getDuration().toNanos()).average().getAsDouble();
     }
 
     public double stddevDuration() {
         double avg = avgNanoDuration();
         double sumSq = 0;
         for (Timing result : results) {
-            sumSq += Math.pow(result.getNanoDuration() - avg, 2);
+            sumSq += Math.pow(result.getDuration().toNanos() - avg, 2);
         }
         return Math.sqrt(sumSq / (results.length - 1));
     }

@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class ThreadedWorker {
-    public static <T> void runInThreads(List<T> allInput, Function<List<T>, Runnable> taskFactory, int numThreads) throws Exception {
+    public static <T> void runInThreads(List<T> allInput, Function<List<T>, Runnable> taskFactory, int numThreads) {
         ExecutorService pool = Executors.newFixedThreadPool(numThreads);
 
         int inputPerSegment = allInput.size() / numThreads;
@@ -18,8 +18,12 @@ public class ThreadedWorker {
         }
         pool.shutdown();
 
-        if(!pool.awaitTermination(10, TimeUnit.SECONDS)) {
-            throw new RuntimeException("I wasn't done yet :(");
+        try {
+            if(!pool.awaitTermination(10, TimeUnit.SECONDS)) {
+                throw new RuntimeException("I wasn't done yet :(");
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Dammit checked exceptions", e);
         }
 
     }

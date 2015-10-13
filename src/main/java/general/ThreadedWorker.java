@@ -6,6 +6,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class ThreadedWorker {
     public static <T> void runInThreads(List<T> allInput, Function<List<T>, Runnable> taskFactory, int numThreads) {
@@ -22,6 +25,11 @@ public class ThreadedWorker {
             tasks.add(task);
         }
         return tasks;
+    }
+
+    public static void runNTimesInThreads(Runnable task, int numThreads) {
+        List<Runnable> tasks = Stream.generate(() -> task).limit(numThreads).collect(Collectors.toList());
+        runInThreads(tasks, numThreads);
     }
 
     public static void runInThreads(List<Runnable> tasks, int numThreads) {

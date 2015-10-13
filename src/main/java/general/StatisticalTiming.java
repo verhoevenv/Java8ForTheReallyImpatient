@@ -45,7 +45,7 @@ public class StatisticalTiming<T> {
 
         for (Timing result : results) {
             if(!result.getResult().equals(firstResult)) {
-                throw new RuntimeException(String.format("Different results: %s, %s", firstResult, result));
+                throw new RuntimeException(String.format("Different results: %s, %s", firstResult, result.getResult()));
             }
         }
     }

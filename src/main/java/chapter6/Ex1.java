@@ -1,5 +1,6 @@
 package chapter6;
 
+import general.Segmenter;
 import general.StatisticalTiming;
 import general.ThreadedWorker;
 
@@ -28,15 +29,15 @@ public class Ex1 {
     private static String calculateLongest(List<String> allWords) throws Exception {
         AtomicReference<String> longest = new AtomicReference<>();
 
-        //some gory details are hidden in the ThreadedWorker class
-        ThreadedWorker.runInThreads(
+        List<Runnable> tasks = Segmenter.splitInTasks(
                 allWords,
                 (sublist) -> () -> {
                     String largestForMe = sublist.stream().max(Comparator.comparing(String::length)).get();
                     longest.accumulateAndGet(largestForMe, (w1, w2) -> (w1 != null && w1.length() > w2.length()) ? w1 : w2);
-                },
-                Runtime.getRuntime().availableProcessors()
+                }
         );
+
+        ThreadedWorker.runEachInSeperateThread(tasks);
 
         return longest.get();
     }
@@ -44,15 +45,16 @@ public class Ex1 {
     private static String calculateLongest_manyReferenceAccessesPerThread(List<String> allWords) throws Exception {
         AtomicReference<String> longest = new AtomicReference<>();
 
-        ThreadedWorker.runInThreads(
+        List<Runnable> tasks = Segmenter.splitInTasks(
                 allWords,
                 (sublist) -> () -> {
                     for (String s : sublist) {
                         longest.accumulateAndGet(s, (w1, w2) -> (w1 != null && w1.length() > w2.length()) ? w1 : w2);
                     }
-                },
-                Runtime.getRuntime().availableProcessors()
+                }
         );
+
+        ThreadedWorker.runEachInSeperateThread(tasks);
 
         return longest.get();
     }

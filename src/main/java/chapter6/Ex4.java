@@ -1,5 +1,6 @@
 package chapter6;
 
+import general.Segmenter;
 import general.ThreadedWorker;
 
 import java.util.concurrent.atomic.LongAccumulator;
@@ -19,17 +20,15 @@ public class Ex4 {
     }
 
     private static long accumulate(long[] elements, LongAccumulator accumulator) {
-        ThreadedWorker.runInThreads(
-                ThreadedWorker.splitInTasks(
+        ThreadedWorker.runEachInSeperateThread(
+                Segmenter.splitInTasks(
                         elements,
                         (sublist) -> () -> {
                             for (long l : sublist) {
                                 accumulator.accumulate(l);
                             }
-                        },
-                        Runtime.getRuntime().availableProcessors()
-                ),
-                Runtime.getRuntime().availableProcessors()
+                        }
+                )
         );
 
         return accumulator.get();

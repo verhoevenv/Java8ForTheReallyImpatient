@@ -10,6 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static general.Uncheck.uncheck;
+
 public class Ex6 {
     public static Map<String, Set<File>> occurrences(Set<File> files) {
         ConcurrentHashMap<String, Set<File>> result = new ConcurrentHashMap<>();
@@ -31,18 +33,4 @@ public class Ex6 {
         result.computeIfAbsent(s, x -> new HashSet<>()).add(f);
     }
 
-    private static Runnable uncheck(RunnableEx wrapped) {
-        return () -> {
-            try {
-                wrapped.run();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        };
-    }
-
-    @FunctionalInterface
-    public interface RunnableEx {
-        void run() throws Exception;
-    }
 }

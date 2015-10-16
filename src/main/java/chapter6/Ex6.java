@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Ex5 {
+public class Ex6 {
     public static Map<String, Set<File>> occurrences(Set<File> files) {
         ConcurrentHashMap<String, Set<File>> result = new ConcurrentHashMap<>();
         List<Runnable> tasks = files.stream()
@@ -23,26 +23,13 @@ public class Ex5 {
 
     private static Stream<String> wordsFromFile(File f) throws IOException {
         return Files.readAllLines(f.toPath()).stream()
-                        .flatMap(line -> Arrays.stream(line.split(" ")));
+                .flatMap(line -> Arrays.stream(line.split(" ")));
     }
 
     private static void addWordToResult(ConcurrentHashMap<String, Set<File>> result, String s, File f) {
-        result.merge(
-                s,
-                mutableSetFrom(f),
-                (s1, s2) -> {
-                    s1.addAll(s2);
-                    return s1;
-                }
-        );
+        //no need to create a set before we know whether we need to add one or modify an existing one
+        result.computeIfAbsent(s, x -> new HashSet<>()).add(f);
     }
-
-    private static Set<File> mutableSetFrom(File f) {
-        Set<File> result = new HashSet<>();
-        result.add(f);
-        return result;
-    }
-
 
     private static Runnable uncheck(RunnableEx wrapped) {
         return () -> {

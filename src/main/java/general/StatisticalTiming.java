@@ -10,7 +10,7 @@ import static general.Timing.time;
 public class StatisticalTiming<T> {
     private Timing[] results;
 
-    private StatisticalTiming(Timing[] results) {
+    public StatisticalTiming(Timing[] results) {
         this.results = results;
     }
 
@@ -40,8 +40,18 @@ public class StatisticalTiming<T> {
         return Math.sqrt(sumSq / (results.length - 1));
     }
 
+    public long medianNanoDuration() {
+        long[] nanos = Arrays.stream(results).mapToLong(timing -> timing.getDuration().toNanos()).toArray();
+        if(nanos.length % 2 == 0) {
+            return (nanos[nanos.length/2] + nanos[nanos.length/2]) / 2; //small rounding error shoulnd't matter on nano accuracy
+        } else {
+            return nanos[(nanos.length + 1)/2];
+        }
+    }
+
     public void assertAllSameResults() {
         Object firstResult = results[0].getResult();
+        if(firstResult == null) return;
 
         for (Timing result : results) {
             if(!result.getResult().equals(firstResult)) {

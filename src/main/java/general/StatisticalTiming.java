@@ -61,6 +61,7 @@ public class StatisticalTiming<T> {
     }
 
     //I think this is statistically okay, but yeah, statistics...
+    //TODO: this isn't okay. Normality is assumed but I believe it is very unlikely runtimes for algorithms follow a normal distribution
     public String summarize() {
         double avg = avgNanoDuration();
         double stderr = stddevDuration() / Math.sqrt(results.length);
